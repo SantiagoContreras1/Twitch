@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Direcciona a otras rutas
-import { login as loginRequest } from "../../services";
-import toast from "react-hot-toast"; // Muestra mensajes
-import { login } from "../../service/api";
+import { useNavigate } from "react-router-dom";
+import { login as loginRequest } from "../../services"
+import toast from "react-hot-toast";
 
-export const useLogin = ()=>{
-    const [isLoading, setIsLoading] = useState(false)//Ver si esta cargando o aun no
+export const useLogin = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate()
 
+    const login = async (email, password) => {
 
-    const login = async (email,password)=>{
         setIsLoading(true)
+
         const response = await loginRequest({
             email,
             password
@@ -18,19 +20,20 @@ export const useLogin = ()=>{
 
         setIsLoading(false)
 
-        if (response.error){
-            return toast.error(response.error?.response?.data || ' Hubo un error al iniciar sesion pelotudito.')
+        if(response.error){
+            return toast.error(response.error?.response?.data || 'Ocurrio un error al iniciar sesión, intenta de nuevo')
         }
 
-        const {userDetails} = response.data
+        const { userDetails } = response.data
 
-        localStorage.setItem('user', JSON.stringify(userDetails))
+        localStorage.setItem('user', JSON.stringify(userDetails));
+
+        toast.success('Sesion iniciada correctamente')
+
         navigate('/')
     }
-
-    return{
+    return {
         login,
         isLoading
     }
-
 }
