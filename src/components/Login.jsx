@@ -94,7 +94,7 @@ export const Login = ({ switchAuthHandler }) => {
                 </button>
             </form>
             <span onClick={switchAuthHandler} className="auth-form-swith-label">
-                No tenes cuenta boludín? Andá a Registrate
+                Don't have an account? Sign up
             </span>
         </div>
     )

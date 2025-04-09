@@ -138,7 +138,7 @@ export const Register = ({ switchAuthHandler }) => {
                 </button>
             </form>
             <span onClick={switchAuthHandler} className="auth-form-switch-label">
-                Ya tenés una cuenta? Andá a loguearte ché.
+                Already have an account? Sign in
             </span>
         </div>
     )
